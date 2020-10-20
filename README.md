@@ -3,6 +3,8 @@
 ## About the project
 🚧 **Project is under development** 🚧
 
+[Preview](https://cloud-front.gdpro.com.br/)
+
 This project is an alternative way to control aws machines and cloud platforms, generate more advanced reports and have more internal control over the machines.
 
 
