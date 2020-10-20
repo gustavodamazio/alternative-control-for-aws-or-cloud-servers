@@ -32,7 +32,7 @@ Some of the technologies and libraries used in the development of the applicatio
 - [Yarn](https://classic.yarnpkg.com/)
 
 ```bash
-$ git clone https://github.com/gustavodamazio/-alternative-control-for-aws-or-cloud-servers.git
+$ git clone https://github.com/gustavodamazio/alternative-control-for-aws-or-cloud-servers.git
 ```
 
 **Follow the steps below**
@@ -52,7 +52,7 @@ $ git clone https://github.com/gustavodamazio/-alternative-control-for-aws-or-cl
 # Fork using GitHub official command line
 # If you don't have the GitHub CLI, use the web site to do that.
 
-$ gh repo fork /gustavodamazio/-alternative-control-for-aws-or-cloud-servers
+$ gh repo fork /gustavodamazio/alternative-control-for-aws-or-cloud-servers
 ```
 
 **Follow the steps below**
