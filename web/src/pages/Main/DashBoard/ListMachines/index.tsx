@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
 import { ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community'
 import { AgGridColumn, AgGridReact } from 'ag-grid-react'
+import React, { useEffect, useState } from 'react'
 
-import { useAuth } from '../../../../contexts/auth'
+import { GridDateComparator } from '../../../../helpers/grid/DateComparator'
 import { GridFormatDate } from '../../../../helpers/grid/FormatDate'
 import Machine from '../../../../models/Machine'
-import MachineService from '../../../../services/MachineService'
 import Title from '../Title'
-import { GridDateComparator } from '../../../../helpers/grid/DateComparator'
 
-const ListMachines: React.FC = () => {
+interface ListMachinesProps {
+  machines: Machine[]
+}
+const ListMachines: React.FC<ListMachinesProps> = props => {
   const [gridApi, setGridApi] = useState<GridApi | null>(null)
   const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | null>(null)
-  const auth = useAuth()
   function onGridReady(params: GridReadyEvent) {
     setGridApi(params.api)
     setGridColumnApi(params.columnApi)
@@ -20,14 +20,8 @@ const ListMachines: React.FC = () => {
 
   const [rowData, setRowData] = useState<Machine[]>([])
   useEffect(() => {
-    MachineService.list()
-      .then(res => {
-        setRowData(res.data)
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  })
+    setRowData(props.machines)
+  }, [props.machines])
   return (
     <>
       <Title>Lista de servidores</Title>
@@ -38,7 +32,13 @@ const ListMachines: React.FC = () => {
         <AgGridReact onGridReady={onGridReady} rowData={rowData} pagination={true} paginationPageSize={100}>
           <AgGridColumn field="instance_id" headerName="Id" sortable={true} filter={true}></AgGridColumn>
           <AgGridColumn field="instance_name" headerName="Nome" sortable={true} filter={true}></AgGridColumn>
-          <AgGridColumn field="instance_type" headerName="Tipo" maxWidth={130} sortable={true} filter={true}></AgGridColumn>
+          <AgGridColumn
+            field="instance_type"
+            headerName="Tipo"
+            maxWidth={130}
+            sortable={true}
+            filter={true}
+          ></AgGridColumn>
           <AgGridColumn
             field="instance_state"
             headerName="Estado"
@@ -47,8 +47,20 @@ const ListMachines: React.FC = () => {
             sortable={true}
             filter={true}
           ></AgGridColumn>
-          <AgGridColumn field="private_ip_address" headerName="Ip privado" maxWidth={150} sortable={true} filter={true}></AgGridColumn>
-          <AgGridColumn field="memory_mb" headerName="Memória (MB)" maxWidth={150} sortable={true} filter={true}></AgGridColumn>
+          <AgGridColumn
+            field="private_ip_address"
+            headerName="Ip privado"
+            maxWidth={150}
+            sortable={true}
+            filter={true}
+          ></AgGridColumn>
+          <AgGridColumn
+            field="memory_mb"
+            headerName="Memória (MB)"
+            maxWidth={150}
+            sortable={true}
+            filter={true}
+          ></AgGridColumn>
           <AgGridColumn field="v_cpu" headerName="V CPU" maxWidth={110} sortable={true} filter={true}></AgGridColumn>
           <AgGridColumn field="gpu" headerName="GPU" maxWidth={110} sortable={true} filter={true}></AgGridColumn>
           <AgGridColumn

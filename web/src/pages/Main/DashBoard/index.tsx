@@ -1,25 +1,27 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
-import { MdChevronLeft as ChevronLeftIcon, MdExitToApp, MdMenu as MenuIcon } from 'react-icons/md';
+import React, { useEffect, useState } from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Box from '@material-ui/core/Box'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import Paper from '@material-ui/core/Paper'
+import { makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import clsx from 'clsx'
+import { MdChevronLeft as ChevronLeftIcon, MdExitToApp, MdMenu as MenuIcon } from 'react-icons/md'
 
-import Copyright from '../../../components/Copyright';
-import { useAuth } from '../../../contexts/auth';
-import Chart from './Chart';
-import { mainListItems } from './ListItems';
-import ListMachines from './ListMachines';
+import Copyright from '../../../components/Copyright'
+import { useAuth } from '../../../contexts/auth'
+import Chart from './Chart'
+import { mainListItems } from './ListItems'
+import ListMachines from './ListMachines'
+import Machine from '../../../models/Machine'
+import MachineService from '../../../services/MachineService'
 
 const drawerWidth = 240
 
@@ -120,6 +122,17 @@ export default function Dashboard() {
   }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
+  const [listMachine, setlistMachine] = useState<Machine[]>([])
+  useEffect(() => {
+    MachineService.list()
+      .then(res => {
+        setlistMachine(res.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }, [])
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -165,13 +178,13 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <Chart machines={listMachine} />
               </Paper>
             </Grid>
             {/* List Machines */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-               <ListMachines></ListMachines>
+                <ListMachines machines={listMachine}></ListMachines>
               </Paper>
             </Grid>
           </Grid>
