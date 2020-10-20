@@ -1,0 +1,16 @@
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "trailingComma": "none",
+    "singleQuote": true,
+    "printWidth": 160,
+    "overrides": [
+        {
+            "files": "ptbr.ts",
+            "options": {
+                "printWidth": 2000
+            }
+        }
+    ]
+}

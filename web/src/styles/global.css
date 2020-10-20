@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+button,
+textarea {
+  font: 500 18px Roboto, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #3f51b5;
+}
+
+a:hover {
+  text-decoration: underline;
+}
