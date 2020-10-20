@@ -1,6 +1,6 @@
 import { ErrorRequestHandler } from 'express';
-import HttpsResponse from 'src/app/models/HttpsResponse';
-import { HttpStatusCode } from 'src/app/models/HttpStatusCodes';
+import HttpsResponse from '../app/models/HttpsResponse';
+import { HttpStatusCode } from '../app/models/HttpStatusCodes';
 import { ValidationError } from 'yup';
 
 interface ValidationErrors {
