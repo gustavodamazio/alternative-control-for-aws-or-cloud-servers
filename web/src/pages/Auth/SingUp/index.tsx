@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { FormHandles } from '@unform/core'
 import { Form } from '@unform/web'
 import { MdCloud } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import TextField from '../../../components/Form/TextField'
@@ -46,6 +46,7 @@ const SignUp: React.FC = () => {
   const classes = useStyles()
   const formRef = useRef<FormHandles | null>(null)
   const authContext = useAuth()
+  const history = useHistory()
   async function handleSubmit(data: { name: string; email: string; password: string }) {
     try {
       const schema = Yup.object().shape({
@@ -68,6 +69,7 @@ const SignUp: React.FC = () => {
           })
 
           authContext.SingIn('', '', true, res.data.details)
+          history.push('')
         })
         .catch((err: AxiosError<HttpsResponse>) => {
           toast.error(`😕 ${err.response?.data.message}`, {
