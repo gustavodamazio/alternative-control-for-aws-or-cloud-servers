@@ -26,7 +26,7 @@ export default function Chart(props: ChartProps) {
   >([])
 
   useEffect(() => {
-    const arr = new Array({ name: 'Ligada(s)', value: 0 }, { name: 'Desligada(s)', value: 0 })
+    const arr = [{ name: 'Ligada(s)', value: 0 }, { name: 'Desligada(s)', value: 0 }]
     props.machines.forEach(m => {
       m.instance_active === true ? arr[0].value++ : arr[1].value++
     })

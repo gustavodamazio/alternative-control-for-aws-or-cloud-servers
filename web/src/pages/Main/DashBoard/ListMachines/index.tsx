@@ -11,7 +11,9 @@ interface ListMachinesProps {
   machines: Machine[]
 }
 const ListMachines: React.FC<ListMachinesProps> = props => {
+  // eslint-disable-next-line
   const [gridApi, setGridApi] = useState<GridApi | null>(null)
+  // eslint-disable-next-line
   const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | null>(null)
   function onGridReady(params: GridReadyEvent) {
     setGridApi(params.api)

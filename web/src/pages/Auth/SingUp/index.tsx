@@ -58,6 +58,8 @@ const SignUp: React.FC = () => {
       formRef?.current?.setErrors({})
       AuthService.singUp(data.name, data.email, data.password)
         .then(res => {
+          history.push('/')
+
           toast.success(`🚀 Bem vindo ${res.data.details.user.name}!`, {
             position: 'top-right',
             autoClose: 5000,
@@ -69,7 +71,6 @@ const SignUp: React.FC = () => {
           })
 
           authContext.SingIn('', '', true, res.data.details)
-          history.push('')
         })
         .catch((err: AxiosError<HttpsResponse>) => {
           toast.error(`😕 ${err.response?.data.message}`, {
